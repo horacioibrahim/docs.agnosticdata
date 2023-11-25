@@ -269,3 +269,8 @@ Os campos específicos são campos contidos especificamene em cada evento. Eles 
 
 ### FBClid
 Você pode atribuir um fbclid (Facebook Pixel id a um evento) via querystring fbclid=IDFBCLID. Contudo lembre-se que Facebook é um *destination* e precisa ser configurado API_KEY e INSTANCE_ID nessas configurações. 
+
+# Links
+Para informações adicionais acesse:
+* https://www.agnosticdata.ai/
+* https://docs.agnosticads.com/
