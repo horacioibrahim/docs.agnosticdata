@@ -2,7 +2,8 @@
 O Agnostic Data Web SDK fornece uma série de funções e personalizações que pode ser implementada na captura dos dados para o Agnostic Data que permitem o negócio junto aos desenvolvedores web aplicar eventos específicos para elevar a experiência dos usuários, além de alavancar a compreensão da interação com os consumidores.
 
 # Conteúdo
-1. [Variáveis auto-preenchidas](##variáveis-auto-preenchidas-não-modificar)
+1. [Variáveis de setup auto-preenchidas](#variáveis-auto-preenchidas-não-modificar)
+1. [Eventos Rápidos e Automáticos](#eventos-rápidos-automáticos)
 1. [Comece pelas meta-tags](#para-a-personalização-comece-pelas-meta-tags)
 1. [Personalizando Tracking de Cliques](#elementos-com-prefixo-agnostic_-para-tracking-click-com-contexto)
 1. [Rastreamento de Cliques](#rastreamento-de-cliques)
@@ -11,7 +12,7 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 1. [ContextFields: enriquecendo as varáveis de contexto](#o-que-são-contextfields)
 1. [Links oficiais](#links)
 
-## Variáveis auto-preenchidas (não modificar)
+## Variáveis de setup auto-preenchidas (não modificar)
 * **sdkVersion**: Esta variável armazena a versão atual do SDK.
 * **DEFAULT_APP_INFO_VERSION**: Esta variável deve ser definida durante a compilação e armazena a versão padrão das informações do aplicativo.
 * **DEFAULT_APP_PACKAGE_NAME**: Esta variável deve ser definida durante a compilação e armazena o nome do pacote padrão do aplicativo.
@@ -22,6 +23,19 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 * **IP_URI**: Esta variável armazena o URI do IP.
 * **SCOPE**: Esta variável armazena o escopo do projeto.
 * **AVG_SESSION**: Esta variável armazena a duração média da sessão em milissegundos. O valor padrão é 300000 (5 minutos).
+
+## Eventos Rápidos e Automáticos
+Os eventos rápidos e automáticos são pré-definidos para o Agnostic Data Web SDK. Nosso propósito é dar a liberdade e a capacidade de criação de eventos ilimitados para qualquer tipo negócio. No entanto, para acelerar os seus resultados criamos alguns eventos pré-definidos que você podemos começar a capturar imediamente ao implementar o Agnostic Data Web SDK em suas páginas, site ou aplicativo web. 
+
+1. [viewContent](#local): evento de visualização de conteúdo é gerado automaticamente quando a página é carregada. 
+1. [click personalizado](#local): evento de clique previamente liberados
+1. [monitor de área](#local): verifica se o elemento prefixado com `agnostic-monitor` está (50% mobile ou 70% desktop) visível na tela.
+1. [video_status](#local): evento de interação de vídeo como youtube, vimeo, pandas video, etc 
+1. [form_submitted](#local): evento de envio de formulário. Se tiver o atributo agnostic-ignore como atributo do formulário, esteve evento será ignorado. 
+1. session_status
+    1. ended: sessão finalizada
+    1. inactivated: sessão inativa após 5 minutos
+1. Movimento do mouse `moves`: movimento do mouse durante os primeiros 5 minutos. 
 
 ## Para a personalização comece pelas meta-tags
 Resumidamente, meta-tag são elementos html adicionados a uma página web para enriquecer o contexto e fornecer informações para automações, marketing, buscadores, dentre outras finalidades. 
@@ -262,9 +276,119 @@ export interface Item {
 }
 ```
 
-## SpecificFields: Eventos
+# SpecificFields: Eventos
 Os campos específicos são campos contidos especificamene em cada evento. Eles são validados durante o processamento, logo cada evento chamado em agnostic("event_name", ... ,  specificFields) tem sua própria estrutura e comporamento. Para saber mais sobre o conteúdo dos eventos acesso a console e navegue no catálogo. 
 
+## view_content
+```javascript
+    const event = {
+        event_type: 'view_content',
+        content_name: document.title || 'none', // from page title
+        content_type: agnostic_content_type, // from meta-tag
+        item_id: variables.agnostic_item_id, // from meta-tag
+        item_name: variables.agnostic_item_name, // from meta-tag
+        promotion_id: variables.agnostic_promotion_id, // from meta-tag
+        promotion_name: variables.agnostic_promotion_name, // from meta-tag
+        currency: variables.agnostic_currency, // from meta-tag
+        value: variables.agnostic_value ? Number(variables.agnostic_value) : null, // from meta-tag
+        content_category: variables.agnostic_content_category, // from meta-tag
+        utm_source: variables.utm_source, // from utm
+        utm_medium: variables.utm_medium, // from utm
+        utm_campaign: variables.utm_campaign, // from utm
+        utm_id: variables.utm_id, // from utm
+        utm_term: variables.utm_term, // from utm
+        utm_content: variables.utm_content, // from utm
+        fbclid: variables.fbclid 
+    }
+
+```
+
+## click
+```javascript
+        const event = {
+            ui_event_type: 'click',
+            element_type: targetElement.tagName, // from click
+            view_content_name: document.title || 'none'), // from title
+            element_label: element_label || 'none'), 
+            alt_text: alt_text, // alt text of element
+            view_content_type: variables.agnostic_content_type, // from meta-tag
+            x: event.clientX, // x position
+            y: event.clientY, // y position
+            // remove prefix agnostic_ from id and clas
+            postfix_text: postfix_text
+        }
+```
+## snippet_read (monitor)
+```javascript
+        const event = {
+            content_name: document.title || 'none', // from page title
+            content_type: variables.agnostic_content_type, // from meta-tag
+            target_id: entry.target.id || null,
+            class_name: entry.target.className || null,
+            utm_source: variables.utm_source, // from utm
+            utm_medium: variables.utm_medium, // from utm
+            utm_campaign: variables.utm_campaign, // from utm
+            utm_id: variables.utm_id, // from utm
+            utm_term: variables.utm_term, // from utm
+            utm_content: variables.utm_content, // from utm
+            fbclid: variables.fbclid
+        }
+```
+
+## video_status
+```javascript
+        const event = {
+            content_name: document.title || 'none'  // from page title
+            content_type: variables.agnostic_content_type, // from meta-tag
+            status: 'play',
+            video_id: video.id || null,
+            video_name: video.name || null,
+            video_duration: video.duration || null,
+            video_current_time: video.currentTime || null,
+            video_volume: video.volume || null,
+            video_playback_rate: video.playbackRate || null,
+            video_src: video.src || null,
+        }
+```
+
+## form_submitted
+```javascript
+        const event = {
+            content_name: document.title || 'none'  // from page title
+            content_type: variables.agnostic_content_type, // from meta-tag
+            form_id: form.id || null,
+            form_name: form.name || null,
+            form_action: form.action || null,
+            form_payload: form_payload
+        }
+```
+## session_status
+```javascript
+        const session_inactivated = {
+            content_name: document.title || 'none', // page title
+            content_type: variables.agnostic_content_type, // from meta-tag
+            currency: variables.agnostic_currency,
+            value: variables.agnostic_value ? Number(variables.agnostic_value) : null,
+            duration: Date.now() - INIT_SESSION,
+            status: 'inactivated', // ou ended
+            utm_source: variables.utm_source, // from utm
+            utm_medium: variables.utm_medium, // from utm
+            utm_campaign: variables.utm_campaign, // from utm
+            utm_id: variables.utm_id, // from utm
+            utm_term: variables.utm_term, // from utm
+            utm_content: variables.utm_content, // from utm
+            fbclid: variables.fbclid 
+        }
+```
+## moves
+```javascript
+        const event = {
+            content_name: content_name: document.title || 'none', // page title
+            content_type: content_type: variables.agnostic_content_type, // from meta-tag
+            moves: moves, // mouse moving
+            duration: sessionDuration
+        }
+```
 
 ## Miscelânea
 
