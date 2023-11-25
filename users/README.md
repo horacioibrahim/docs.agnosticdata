@@ -3,7 +3,7 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 
 # Conteúdo
 1. [Variáveis de setup auto-preenchidas](#variáveis-auto-preenchidas-não-modificar)
-1. [Eventos Rápidos e Automáticos](#eventos-rápidos-automáticos)
+1. [Eventos Rápidos e Automáticos](#eventos-rápidos-e-automáticos)
 1. [Comece pelas meta-tags](#para-a-personalização-comece-pelas-meta-tags)
 1. [Personalizando Tracking de Cliques](#elementos-com-prefixo-agnostic_-para-tracking-click-com-contexto)
 1. [Rastreamento de Cliques](#rastreamento-de-cliques)
@@ -27,15 +27,15 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 ## Eventos Rápidos e Automáticos
 Os eventos rápidos e automáticos são pré-definidos para o Agnostic Data Web SDK. Nosso propósito é dar a liberdade e a capacidade de criação de eventos ilimitados para qualquer tipo negócio. No entanto, para acelerar os seus resultados criamos alguns eventos pré-definidos que você podemos começar a capturar imediamente ao implementar o Agnostic Data Web SDK em suas páginas, site ou aplicativo web. 
 
-1. [viewContent](#local): evento de visualização de conteúdo é gerado automaticamente quando a página é carregada. 
-1. [click personalizado](#local): evento de clique previamente liberados
-1. [monitor de área](#local): verifica se o elemento prefixado com `agnostic-monitor` está (50% mobile ou 70% desktop) visível na tela.
-1. [video_status](#local): evento de interação de vídeo como youtube, vimeo, pandas video, etc 
-1. [form_submitted](#local): evento de envio de formulário. Se tiver o atributo agnostic-ignore como atributo do formulário, esteve evento será ignorado. 
-1. session_status
-    1. ended: sessão finalizada
+1. [viewContent](#view_content): evento de visualização de conteúdo é gerado automaticamente quando a página é carregada. 
+1. [click personalizado](#click): evento de clique previamente liberados
+1. [monitor de área](#snippet_read-monitor): verifica se o elemento prefixado com `agnostic-monitor` está (50% mobile ou 70% desktop) visível na tela.
+1. [video_status](#video_status): evento de interação de vídeo como youtube, vimeo, pandas video, etc 
+1. [form_submitted](#form_submitted): evento de envio de formulário. Se tiver o atributo agnostic-ignore como atributo do formulário, esteve evento será ignorado. 
+1. [session_status](#session_status): envia eventos automáticos quando uma sessão é finalizada ou inativa
+    1. ended: sessão finalizada (antes de ser fechada ou troca de tab)
     1. inactivated: sessão inativa após 5 minutos
-1. Movimento do mouse `moves`: movimento do mouse durante os primeiros 5 minutos. 
+1. [Movimento do mouse `moves`](#moves): movimento do mouse durante os primeiros 5 minutos. 
 
 ## Para a personalização comece pelas meta-tags
 Resumidamente, meta-tag são elementos html adicionados a uma página web para enriquecer o contexto e fornecer informações para automações, marketing, buscadores, dentre outras finalidades. 
