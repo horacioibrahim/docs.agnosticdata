@@ -25,17 +25,17 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 * **AVG_SESSION**: Esta variável armazena a duração média da sessão em milissegundos. O valor padrão é 300000 (5 minutos).
 
 ## Eventos Rápidos e Automáticos
-Os eventos rápidos e automáticos são pré-definidos para o Agnostic Data Web SDK. Nosso propósito é dar a liberdade e a capacidade de criação de eventos ilimitados para qualquer tipo negócio. No entanto, para acelerar os seus resultados criamos alguns eventos pré-definidos que você podemos começar a capturar imediamente ao implementar o Agnostic Data Web SDK em suas páginas, site ou aplicativo web. 
+Os eventos rápidos e automáticos são pré-definidos para o Agnostic Data Web SDK. Nosso propósito é dar a liberdade e a capacidade de criação de eventos ilimitados para qualquer tipo negócio. No entanto, para acelerar os seus resultados criamos alguns eventos pré-definidos onde você irá começar a capturar imediamente ao implementar o Agnostic Data Web SDK em suas páginas, site ou aplicativo web. 
 
 1. [viewContent](#view_content): evento de visualização de conteúdo é gerado automaticamente quando a página é carregada. 
-1. [click personalizado](#click): evento de clique previamente liberados
-1. [monitor de área](#snippet_read-monitor): verifica se o elemento prefixado com `agnostic-monitor` está (50% mobile ou 70% desktop) visível na tela.
+1. [click](#click): evento de clique. As fontes de cliques podem ser personalizadas.
+1. [monitor](#snippet_read-monitor): monitor de área irá verificar se o elemento prefixado com `agnostic-monitor` está (50% mobile ou 70% desktop) visível na tela.
 1. [video_status](#video_status): evento de interação de vídeo como youtube, vimeo, pandas video, etc 
-1. [form_submitted](#form_submitted): evento de envio de formulário. Se tiver o atributo agnostic-ignore como atributo do formulário, esteve evento será ignorado. 
+1. [form_submitted](#form_submitted): evento de envio de formulário. Se  o atributo agnostic-ignore está aplicado ao formulário o evento será ignorado. 
 1. [session_status](#session_status): envia eventos automáticos quando uma sessão é finalizada ou inativa
     1. ended: sessão finalizada (antes de ser fechada ou troca de tab)
     1. inactivated: sessão inativa após 5 minutos
-1. [Movimento do mouse `moves`](#moves): movimento do mouse durante os primeiros 5 minutos. 
+1. [moves](#moves): movimento do mouse durante os primeiros 5 minutos. 
 
 ## Para a personalização comece pelas meta-tags
 Resumidamente, meta-tag são elementos html adicionados a uma página web para enriquecer o contexto e fornecer informações para automações, marketing, buscadores, dentre outras finalidades. 
