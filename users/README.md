@@ -9,6 +9,7 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 1. [Otimização para análise de conteúdo](#-análise-de-conteúdo-otimizando-as-variáveis-de-controle-automático)
 1. [Personalização avançada](#-personalização-avançada-windowagnostica)
 1. [ContextFields: enriquecendo as varáveis de contexto](#o-que-são-contextfields)
+1. [Links oficiais](#links)
 
 ## Variáveis auto-preenchidas (não modificar)
 * **sdkVersion**: Esta variável armazena a versão atual do SDK.
