@@ -1,4 +1,4 @@
-# Documentação do Agnostic Data Web SDK v1.0.1
+# 📙 Documentação do Agnostic Data Web SDK v1.0.1
 O Agnostic Data Web SDK fornece uma série de funções e personalizações que pode ser implementada na captura dos dados para o Agnostic Data que permitem o negócio junto aos desenvolvedores web aplicar eventos específicos para elevar a experiência dos usuários, além de alavancar a compreensão da interação com os consumidores.
 
 # Conteúdo
@@ -24,7 +24,7 @@ O Agnostic Data Web SDK fornece uma série de funções e personalizações que 
 * **SCOPE**: Esta variável armazena o escopo do projeto.
 * **AVG_SESSION**: Esta variável armazena a duração média da sessão em milissegundos. O valor padrão é 300000 (5 minutos).
 
-## Eventos Rápidos e Automáticos
+## 1️⃣ Eventos Rápidos e Automáticos
 Os eventos rápidos e automáticos são pré-definidos para o Agnostic Data Web SDK. Nosso propósito é dar a liberdade e a capacidade de criação de eventos ilimitados para qualquer tipo negócio. No entanto, para acelerar os seus resultados criamos alguns eventos pré-definidos onde você irá começar a capturar imediamente ao implementar o Agnostic Data Web SDK em suas páginas, site ou aplicativo web. 
 
 1. [viewContent](#view_content): evento de visualização de conteúdo é gerado automaticamente quando a página é carregada. 
@@ -37,7 +37,7 @@ Os eventos rápidos e automáticos são pré-definidos para o Agnostic Data Web 
     1. inactivated: sessão inativa após 5 minutos
 1. [moves](#moves): movimento do mouse durante os primeiros 5 minutos. 
 
-## Para a personalização comece pelas meta-tags
+## 2️⃣ Para a personalização comece pelas meta-tags
 Resumidamente, meta-tag são elementos html adicionados a uma página web para enriquecer o contexto e fornecer informações para automações, marketing, buscadores, dentre outras finalidades. 
 
 Nosso primeiro exemplo de personalização é o **tempo de sessão**. Sem necessidade de desenvolvedor ou mesmo com pouca experiência, basta adicionar a tag de nome `agnostic_inactivate_minutes` ao seu código e modificar o atributo `content` que representa o tempo em minutos de uma sessão esperada. 
@@ -47,7 +47,7 @@ Nosso primeiro exemplo de personalização é o **tempo de sessão**. Sem necess
 <meta name="agnostic_inactivate_minutes" content="10">
 ```
 
-## Elementos com Prefixo "agnostic_" para tracking click com contexto
+## 3️⃣ Elementos com Prefixo "agnostic_" para tracking click com contexto
 Continuando nossa jornada de personalização temos o prefixo `agnostic_` que seleciona todos os elementos cujo id ou class começa com "agnostic_".
 
 Vamos supor que você quer identificar um botão em seu site que tem um papel importante, como um botão de compra. No exemplo abaixo, enviamos automaticamente dentro de um evento `click` o rótulo `postfix_text` `"purchaseButton"`. 
@@ -73,7 +73,7 @@ No exemplo abaixo, os valores iniicia, padronizados, dos elementos que serão ca
 <meta name="agnostic_click_listeners" content='button, a, [id^="agnostic_"], [class^="agnostic_"], input, select, textarea, checkbox, radio, image, img, tab'>
 ```
 
-## 🚀 Análise de Conteúdo: otimizando as variáveis de controle automático
+## 4️⃣ 🚀 Análise de Conteúdo: otimizando as variáveis de controle automático
 Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da página, ajudando na tomada de decisões baseadas em eventos e na personalização de experiências de usuário. 
 
 Quando configuradas podem capturar automaticamente sem a necessidade de criar um objeto específico de evento facilitando a vida de times com pouca experiência técnica em desenvolvimento.
@@ -167,7 +167,7 @@ Atributos que podem ser personalizados nos campos de contexto:
     <!-- Exemplo de uso: Esta meta tag define o valor do conteúdo, como o preço de um produto ou o custo de um artigo -->    
     ```    
 
-# 💪 Personalização avançada: window.agnostica()
+# 5️⃣ 💪 Personalização avançada: window.agnostica()
 A função window.agnostica é utilizada para enviar eventos para o sistema Agnostic Data. Deve-se passar 3 argumentos, sendo eles: nome do evento, dados contextuais e campos específicos do evento.
 
 ```javascript
