@@ -58,7 +58,7 @@ ou se tiver utilizando class enviaremos o rótulo `postfix_text` com `"specialOf
 ```html
 <button class="agnostic_specialOffer">Oferta Especial</button>
 ``````
-## Rastreamento de Cliques 
+## 4️⃣ Rastreamento de Cliques 
 Por padrão, automaticamente capturamos os cliques realizados na página e nos elementos `button, a, [id^="agnostic_"], [class^="agnostic_"], input, select, textarea, checkbox, radio, image, img, tab`.
 
 Você pode personalizar uma nova lista de seletores para rastreamento de cliques, incluindo botões, links, elementos com id/class prefixados como "meunegocio_", dentre outros. 
@@ -73,7 +73,7 @@ No exemplo abaixo, os valores iniicia, padronizados, dos elementos que serão ca
 <meta name="agnostic_click_listeners" content='button, a, [id^="agnostic_"], [class^="agnostic_"], input, select, textarea, checkbox, radio, image, img, tab'>
 ```
 
-## 4️⃣ 🚀 Análise de Conteúdo: otimizando as variáveis de controle automático
+## 5️⃣ 🚀 Análise de Conteúdo: otimizando as variáveis de controle automático
 Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da página, ajudando na tomada de decisões baseadas em eventos e na personalização de experiências de usuário. 
 
 Quando configuradas podem capturar automaticamente sem a necessidade de criar um objeto específico de evento facilitando a vida de times com pouca experiência técnica em desenvolvimento.
@@ -167,7 +167,7 @@ Atributos que podem ser personalizados nos campos de contexto:
     <!-- Exemplo de uso: Esta meta tag define o valor do conteúdo, como o preço de um produto ou o custo de um artigo -->    
     ```    
 
-# 5️⃣ 💪 Personalização avançada: window.agnostica()
+# 6️⃣ 💪 Personalização avançada: window.agnostica()
 A função window.agnostica é utilizada para enviar eventos para o sistema Agnostic Data. Deve-se passar 3 argumentos, sendo eles: nome do evento, dados contextuais e campos específicos do evento.
 
 ```javascript
@@ -276,7 +276,7 @@ export interface Item {
 }
 ```
 
-# SpecificFields: Eventos
+# 7️⃣ ✈️ SpecificFields: Eventos
 Os campos específicos são campos contidos especificamene em cada evento. Eles são validados durante o processamento, logo cada evento chamado em agnostic("event_name", ... ,  specificFields) tem sua própria estrutura e comporamento. Para saber mais sobre o conteúdo dos eventos acesso a console e navegue no catálogo. 
 
 ## view_content
