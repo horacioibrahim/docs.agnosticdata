@@ -2,13 +2,13 @@
 O Agnostic Data Web SDK fornece uma série de funções e personalizações que pode ser implementada na captura dos dados para o Agnostic Data que permitem o negócio junto aos desenvolvedores web aplicar eventos específicos para elevar a experiência dos usuários, além de alavancar a compreensão da interação com os consumidores.
 
 # Conteúdo
-[Variáveis auto-preenchidas](##variáveis-auto-preenchidas-não-modificar)
-[Comece pelas meta-tags](#para-a-personalização-comece-pelas-meta-tags)
-[Personalizando Tracking de Cliques](#elementos-com-prefixo-agnostic_-para-tracking-click-com-contexto)
-[Rastreamento de Cliques](#rastreamento-de-cliques)
-[Otimização para análise de conteúdo](#-análise-de-conteúdo-otimizando-as-variáveis-de-controle-automático)
-[Personalização avançada](#-personalização-avançada-windowagnostica)
-[ContextFields: enriquecendo as varáveis de contexto](#o-que-são-contextfields)
+1. [Variáveis auto-preenchidas](##variáveis-auto-preenchidas-não-modificar)
+1. [Comece pelas meta-tags](#para-a-personalização-comece-pelas-meta-tags)
+1. [Personalizando Tracking de Cliques](#elementos-com-prefixo-agnostic_-para-tracking-click-com-contexto)
+1. [Rastreamento de Cliques](#rastreamento-de-cliques)
+1. [Otimização para análise de conteúdo](#-análise-de-conteúdo-otimizando-as-variáveis-de-controle-automático)
+1. [Personalização avançada](#-personalização-avançada-windowagnostica)
+1. [ContextFields: enriquecendo as varáveis de contexto](#o-que-são-contextfields)
 
 ## Variáveis auto-preenchidas (não modificar)
 * **sdkVersion**: Esta variável armazena a versão atual do SDK.
