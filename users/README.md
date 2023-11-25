@@ -22,16 +22,20 @@ Este SDK fornece uma série de funções e variáveis que permitem aos desenvolv
 ## Elementos com Prefixo "agnostic_" para tracking click com contexto
 Seleciona todos os elementos cujo id ou class começa com "agnostic_". Você pode usar a tag para elementos com o prefixo "agnostic_". 
 
-Vamos supor que você quer identificar um botão em seu site que tem um papel importante, como um botão de compra. O exemplo abaixo, envia automaticamente dentro do evento de click o atributo `postfix_text` com "purchaseButton". 
+Vamos supor que você quer identificar um botão em seu site que tem um papel importante, como um botão de compra. O exemplo abaixo, envia automaticamente dentro do evento de click o atributo `postfix_text` com `"purchaseButton"`. 
 ```html
 <button id="agnostic_purchaseButton">Comprar Agora</button>
 ```
-ou se tiver utilizando class onde no exemplo abaixo, automaticamente enviará dentro do evento de click o atributo `postfix_text` com "specialOffer". 
+ou se tiver utilizando class onde no exemplo abaixo, automaticamente enviará dentro do evento de click o atributo `postfix_text` com `"specialOffer"``. 
 ```html
 <button class="agnostic_specialOffer">Oferta Especial</button>
 ``````
 ## Rastreamento de Cliques 
-Defina uma lista de seletores para rastreamento de cliques, incluindo botões, links, elementos com id/class prefixados com "agnostic_", e vários tipos de campos de entrada. Abaixo os valores padrões dos elementos que serão capturados os clicks. Modifique essa lista se quiser controlar os elementos que enviam evento de clique. 
+Por padrão os cliques realizados na página e nos elementos `button, a, [id^="agnostic_"], [class^="agnostic_"], input, select, textarea, checkbox, radio, image, img, tab` são capturados automaticamente.
+
+Você pode definir uma nova lista de seletores para rastreamento de cliques, incluindo botões, links, elementos com id/class prefixados com "agnostic_", e vários tipos de campos de entrada. 
+
+No exemplo abaixo, os valores padrões dos elementos que serão capturados dos clicks estão representados, modifique essa lista se quiser controlar os elementos que enviam evento de clique. 
 
 **Importante**: redefinir o comporamento padrão pode impactar na captura de eventos prefixados com `agnostic_`
 
@@ -39,10 +43,12 @@ Defina uma lista de seletores para rastreamento de cliques, incluindo botões, l
 <meta name="agnostic_click_listeners" content='button, a, [id^="agnostic_"], [class^="agnostic_"], input, select, textarea, checkbox, radio, image, img, tab'>
 ```
 
-## Variáveis de Meta Tag para Análise de Conteúdo (automático)
-Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da página, ajudando na tomada de decisões baseadas em dados e na personalização de experiências de usuário. Quando configuradas são capturadas automaticamente sem a necessidade de criar um objeto específico de evento. (veja eventos específicos mais abaixo)
+## Análise de Conteúdo: otimizando as variáveis de controle automático
+Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da página, ajudando na tomada de decisões baseadas em eventos e na personalização de experiências de usuário. 
 
-1. Tipo de Conteúdo (agnostic_content_type)
+Quando configuradas são capturadas automaticamente sem a necessidade de criar um objeto específico de evento. (veja eventos específicos mais abaixo).
+
+1. Tipo de Conteúdo (`agnostic_content_type`)
     
     * **Descrição**: Define o tipo de conteúdo da página (ex: artigo, produto, categoria, teste A/B).
     * **Valor**: Pode ser uma string fixa (ex: "article") ou dinamicamente gerada pelo código baseada no conteúdo da página.
@@ -51,7 +57,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_content_type" content="article">
     <!-- Exemplo de uso: Esta meta tag define o tipo de conteúdo da página, por exemplo, um artigo -->
     ```
-2. Categoria de Conteúdo (agnostic_content_category)
+2. Categoria de Conteúdo (`agnostic_content_category`)
     
     **Descrição**: Especifica a categoria do conteúdo (ex: notícias, esportes, moda, elétrica, hidráulca, protestos, emolumentos).
     **Valor**: Pode ser uma string fixa (ex: "news") ou gerada dinamicamente para refletir a categoria do conteúdo da página.
@@ -60,7 +66,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_content_category" content="news">
     <!-- Exemplo de uso: Esta meta tag define a categoria de conteúdo da página, como notícias -->
     ```    
-3. ID do Item (agnostic_item_id)
+3. ID do Item (`agnostic_item_id`)
     
     * **Descrição**: Define um identificador único para o item na página, como o ID de um produto ou artigo.
     * **Valor**: Normalmente gerado dinamicamente para corresponder ao ID específico do item sendo exibido.
@@ -69,7 +75,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_item_id" content="12345">
     <!-- Exemplo de uso: Esta meta tag define um ID único para o item na página, como o ID de um produto ou artigo -->
     ```   
-4. Nome do Item (agnostic_item_name)
+4. Nome do Item (`agnostic_item_name`)
     
     * **Descrição**: Define o nome do item na página, como o nome de um produto ou o título de um artigo.
     * **Valor**: Geralmente gerado dinamicamente para refletir o nome real do item em questão.
@@ -78,7 +84,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_item_name" content="Nome do Produto">
     <!-- Exemplo de uso: Esta meta tag define o nome do item na página, como o nome de um produto ou o título de um artigo -->    
     ```    
-5. Promoção (agnostic_is_promo)
+5. Promoção (`agnostic_is_promo`)
     
     * **Descrição**: Indica se o conteúdo é promocional.
     * **Valor**: Pode ser uma string fixa ("true" ou "false") ou determinada dinamicamente com base na natureza do conteúdo.
@@ -87,7 +93,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_is_promo" content="true">
     <!-- Exemplo de uso: Esta meta tag define se o conteúdo é promocional -->    
     ```    
-6. ID da Promoção (agnostic_promotion_id)
+6. ID da Promoção (`agnostic_promotion_id`)
     
     * **Descrição**: Define o ID de uma promoção para campanhas de marketing.
     * **Valor**: Pode ser uma string fixa ou gerada dinamicamente para corresponder à promoção específica.
@@ -96,7 +102,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_promotion_id" content="promo123">
     <!-- Exemplo de uso: Esta meta tag define o ID de uma promoção para campanhas de marketing -->    
     ```    
-7. Nome da Promoção (agnostic_promotion_name)
+7. Nome da Promoção (`agnostic_promotion_name`)
     
     * **Descrição**: Define o nome de uma promoção para campanhas de marketing.
     * **Valor**: Pode ser uma string fixa ou gerada dinamicamente para corresponder ao nome da promoção.
@@ -105,7 +111,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_promotion_name" content="Promoção de Verão">
     <!-- Exemplo de uso: Esta meta tag define o nome de uma promoção para campanhas de marketing -->    
     ```    
-8. Moeda (agnostic_currency)
+8. Moeda (`agnostic_currency`)
     
     * **Descrição**: Define a moeda usada para quaisquer valores monetários na página.
     * **Valor**: Geralmente uma string fixa representando o código da moeda (ex: "USD", "EUR", "BRL").
@@ -114,7 +120,7 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     <meta name="agnostic_currency" content="BRL">
     <!-- Exemplo de uso: Esta meta tag define a moeda usada para valores na página -->
     ```    
-9. Valor (agnostic_value)
+9. Valor (`agnostic_value`)
     
     * **Descrição**: Define o valor monetário associado ao conteúdo, como o preço de um produto.
     * **Valor**: Pode ser fixo ou dinamicamente gerado, especialmente útil para páginas de produtos onde o preço pode variar.
@@ -125,26 +131,27 @@ Essas variáveis permitem uma análise detalhada e personalizada do conteúdo da
     ```    
 
 # window.agnostica()
-A função window.agnostica é utilizada para enviar eventos para o sistema Agnostica é composta de 3 variáveis: nome do evento, dados contextuais e campos específicos do evento.
+A função window.agnostica é utilizada para enviar eventos para o sistema Agnostica. Deve-se passar 3 argumentos, sendo eles: nome do evento, dados contextuais e campos específicos do evento.
 
 ```javascript
 // Recebe o nome do evento, contextFields e specificFields e envia o fluxo onde:
 // contextFields: user_id, user_pseudo_id, user_phone, userToken, is_promo, items
-// specificFields: campos específicos do evento com validação. Veja a documentação. Ex.: {product_id: 123, product_name: "produto 1"}
+// specificFields: campos específicos do evento com validação. Veja a documentação. 
+// Ex.: {product_id: 123, product_name: "produto 1"}
 
 let contextFields = {}
 let specificFields = {}
 window.agnostica("event_name", contextFields, specificFields)
 ```
 
-Aqui está um exemplo de evento que podem ser enviados usando esta função. Contudo, este evento é enviado automaticamente quando o usuário clica em um elemento na interface do usuário. Hipoteticamente, pode ser enviado manualmente com:
+Aqui está um exemplo de evento que podem ser enviados usando a `agnostica`. *Contudo, este evento é enviado automaticamente quando o usuário clica em um elemento na interface do usuário*. Aqui hipoteticamente, vamos usá-lo para representer um envio manual utilizando o **sdk**.
 ```javascript
-window.agnostica('click', contextFields, complement);
+window.agnostica('click', contextFields, specificFields);
 ```
-* `contextFields`: Este objeto contém informações contextuais sobre o evento, como o ID do usuário (veja em "ContextFields Enriquecendo as varáveis de contexto")
-* `complement`: Este objeto contém informações adicionais sobre o evento, como o ID do elemento clicado, o texto do elemento clicado, etc. (veja documentação)
+* `contextFields`: Este objeto contém informações contextuais sobre o evento, como o ID do usuário (veja na seção "ContextFields Enriquecendo as varáveis de contexto")
+* `specificFields`: Este objeto contém informações específicas sobre o evento, como o ID do elemento clicado, o texto do elemento clicado, e outros atributos previamente esperados (veja mais em Console => Catalog).
 
-## contextFields
+## O que são contextFields?
 Os `contextFields` dão contexto ao evento e compõe o payload. 
 ```javascript
     let event = {
@@ -153,9 +160,13 @@ Os `contextFields` dão contexto ao evento e compõe o payload.
     };
 ```
 
-## ContextFields Enriquecendo as varáveis de contexto
-Você pode enriquecer as variáveis de contexto. IMPORTANTE: não altere a variável **scope** e nenhuma das variáveis em **## Variáveis auto-preenchidas (não modificar)**,
-pois a solução poderá parar de capturar e o projeto ser bloqueado automaticamente. Abaixo descrevemos essas variáveis que podem ser enriquecidas quando na WEB, dado a necessidade. 
+### ContextFields: enriquecendo as varáveis de contexto
+Você pode enriquecer as variáveis de contexto, modificando os atributos de contextFields de acordo com a necessidade. Abaixo descrevemos essas variáveis que podem ser enriquecidas, neste exemplo quando na WEB.
+
+```
+**IMPORTANTE**: não altere a variável **scope** e nenhuma das variáveis na seção **Variáveis auto-preenchidas 
+(não modificar)**, pois a solução poderá parar de capturar e o projeto ser bloqueado automaticamente.
+```
 
 Seguem exemplos de uso dos campos de contexto (contextFields) que você poderá alterar e escolher valores (quando na WEB):
 
@@ -201,7 +212,7 @@ Seguem exemplos de uso dos campos de contexto (contextFields) que você poderá 
     * **Descrição:** lista de itens com estrutura pré-definda conforme "Estrutura de um Item" a seguir.
 
 
-### Estrutura de um Item
+#### Estrutura de um Item
 Segue a estrutura de um item que pode ser adicionado na Array items do contextFields do tópico "Enriquecendo as varáveis de contexto". Lembre-se que os itens sem a interroção (?) no final da declaração do nome são obrigatórios, como `id, quantity, value, discount, etc`. Os campos com Nullable podem ser passados como `null` ou o `<tipo>` definido.
 
 ```typescript
