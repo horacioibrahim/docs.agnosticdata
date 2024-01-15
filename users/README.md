@@ -1109,13 +1109,14 @@ let pixel_url = `${PIXEL_URL_BASE}&fdoc=CODE&doc={{CODE}}&acid={{acid}}&apid={{C
 
 // quando vc utilizar fdoc está informando o campo para o qual irá identificar uma entrada 
 const contactsJSON = [
-    {CODE: "test-91817-4151-8f24-3910c7cadb13", hash: "auto",
-    qs_target: qs_target, 
-    pixel_url: pixel_url ,
-    shorten_url: "https://rslv.cc/", 
-    target_url: "https://resolve.cenprot.org.br/app/", 
-    utm_source: "fonte", utm_medium: "email", utm_campaign: "campanhaX", utm_content: "pf", utm_term: "livros%2Bcadernos%2Bcanetas", 
-    acid: "meu-uuid-uniq-user",
+    {
+        CODE: "test-91817-4151-8f24-3910c7cadb13", hash: "auto",
+        shorten_url: "https://rslv.cc/", 
+        target_url: "https://resolve.cenprot.org.br/app/", 
+        utm_source: "fonte", utm_medium: "email", utm_campaign: "campanhaX", utm_content: "pf", utm_term: "livros%2Bcadernos%2Bcanetas", 
+        acid: "meu-uuid-uniq-user",
+        qs_target: qs_target, 
+        pixel_url: pixel_url ,
     _controle: "seu_controle_de_envios_ou_lista_nome"}
     // ... até 2.000
 ]
