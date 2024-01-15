@@ -1040,7 +1040,114 @@ Identify user for security reasons (into 1st party) and business purposes. Use o
 ```
 
 ## Utilizando window.AG_ACID 
-Utilize window.AG_ACID para associar um identificador de usuário (ID) ao pseudo_id e as querystring como apid (pixel id) ou utm. Desta forma, você pode compreender eventos do usuário que ocorreram antes mesmo dele se tornar um usuário da plataforma caso tenha já navegado no site. Esta é uma forma de associar eventos de usuário não autenticado (ou logado) a um usuário reconhecido do sistema.    
+Utilize window.AG_ACID para associar um identificador de usuário (ID) ao pseudo_id e as querystring como apid (pixel id) ou utm. Desta forma, você pode compreender eventos do usuário que ocorreram antes mesmo dele se tornar um usuário da plataforma caso tenha já navegado no site. Esta é uma forma de associar eventos de usuário não autenticado (ou logado) a um usuário reconhecido do sistema.  
+
+* Nova versão: ao enviar um sign_in ou sign_up, é requerido enviar user_id. Veja a documentação dos eventos sign_in e/ou sign_up. Com isso não se faz necessário chamar window.AG_ACID. 
+
+## Contacts Service
+Contact service é o microsserviço para encurtador de URL, redirecionamento e criação de links de pixel para ser enviados em e-mails. 
+
+### O que você precisa saber sobre Contacts?
+    1. Todos os campos enviados no payload serão salvos para cada contato
+    1. Os campos serão mantidos como CASE SENSITIVE
+    1. Você precisará fornecer o modelo desta base de contatos enviando no `payload.model_name`
+    1. Você precisará enviar uma descrição do modelo enviando no `payload.model_description`
+    1. Você precisará enviar os campos enviados em um forma de uma lista separada por vírgulas em `payload.model_fields`
+    1. No máximo 2.000 contatos são processos por requisição
+    1. Para a criação de hash encurtadas automáticas você precisará informar o campo `hash` de cada contato o texto `"auto"`
+        1. Caso deseje enviar seu próprio hash precisará garantir que é único. Um documento existente irá cancelar toda a requisição. 
+
+### Interpolação via qs_target
+Você deverá enviar o campo `qs_target` que será utilizaro para interpolação de valores dos campos (CASE SENSITIVE) enviados. Logo, se você enviar um campo chamado `CODE` e deseja que ele seja expostos na querystring da URL de destino preencha o `qs_target` com `"?campanha={{CODE}}"`, desta forma, o algoritmo irá interpolar na querystring final o campo CODE. 
+
+**Mais exemplos**
+Imagine que você tenha as utms utm_source, utm_medium, utm_campaign	e utm_content com valores cenprot, email, campanha01 e pf, respectivamente. Para interpolar para a querystring final, teremos uma `qs_target` parecida com:
+```
+?campanha={{CODE}}utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}
+```
+
+### Interpolação de pixel_url
+De forma similar, você pode criar uma url com uma imagem de 1px para ser inserida no e-mail e acompanhar, como padrão de mercado, a interação básica de leitura sobre aquela mensagem. Note, que as soluções de e-mail já informam o remetente quando um determinado usuário (destinatário) ler uma mensagem, porém essa configuração pode ser alterada pelos usuários, por isso o mercado utiliza atualmente um pixel que permite interpretar esse cenário. 
+
+Para obter um pixel no Agnostic Data, se esse eventualmente existir basta acessar a url do serviço:
+```
+https://utils.agnosticdata.ai/v2/?api_key=CHAVE_DO_PROJETO&project_id=ID_DO_PROJETO&f=pixel&doc={{hash}}
+```
+
+**doc**
+`doc` refere-se ao hash do pixel de um determinado usuário. É um identificador único. 
+
+**Outros atributos mapeados da querystring do pixel URL**
+Os campos a seguir são previamente conhecidos e podem ser utilizados no Agnostic Data para ajudar no seu compromisso da melhor prestação de serviço e suporte. Os campos que também podem ser enviados como querystring são:
+* acid: identificação direta (chave primária) de um usuário do seu sistema (aplicativo, ambiente). NÃO USE DOCUMENTOS PESSOAIS.
+* apsid: identificação de um usuário anônimo
+* vv: o valor desta interação
+* cc: moeda sobre o custo (custo de marketing, aquisição, click, envio de email, etc)
+
+além das UTMs
+
+```javascript
+    const utm_source = req.query.utm_source || "";
+    const utm_medium = req.query.utm_medium || ""
+    const utm_campaign = req.query.utm_campaign || "";
+    const utm_term = req.query.utm_term || "";
+    const utm_content = req.query.utm_content || "";
+    const utm_id = req.query.utm_id || "
+```
+
+### Complete Data em Contacts
+Se ao criar seus contatos você passou campos padronizados de dados complementadores de usuários (complete_data), além dos seus campos personalizados e do seu interesse, eles serão utilizados para permitir conhecer seu cliente (KYC). 
+Na etapa de criação dos contatos é possível passar os campos adicionais que chamamos de `complete_data` são eles:
+
+* complete_data_save // se true informará ao serviço contacts para salvar os dados pessoais
+* complete_data_has_hash || "base64" // pode ser base64 ou sha256 ou plain; se não informado será base64. Use "plain" se desejar que os dados sejam humanamente legíveis pera time de suporte e operações. 
+* complete_data_email || null
+* complete_data_phone || null
+* complete_data_firstname || null
+* complete_data_lastname || null
+* complete_data_date_born || null
+* complete_data_gender || null
+* complete_data_city || null
+* complete_data_neighborhood || null
+* complete_data_state || null
+* complete_data_zipcode || null
+* complete_data_country || null
+* complete_data_order_id || null
+* complete_data_ps_id_ga || null // pseudo id dos caras google measurement id
+* complete_data_ps_id_fb || null // pseudo id facebook pixel id
+* complete_data_ps_id_uc || null // pseudo id uxcam
+* complete_data_ps_id_sg || null // pseudo id segment
+* complete_data_ps_id_hj || null // pseudo id hotjar
+* complete_data_ps_id_ap || null // pseudo id amplitude
+* complete_data_install_id || null // application install hash id apple ou android
+
+### Enviando os contacts (exemplo Javascript)
+```javascript
+
+const URL = 'https://utils.agnosticdata.ai/v2/?api_key=' + api_key + '&project_id=' + project_id + '&f=contacts'
+const PIXEL_URL_BASE = 'https://utils.agnosticdata.ai/v2/?api_key=' + api_key + '&project_id=' + project_id + '&f=pixel'
+const MODEL_NAME = "newco_padrao_01"
+const MODEL_DESCRIPTION = "contém dados de usuários de protestos"
+const MODEL_FIELDS = ""
+
+const contactsJSON = [
+    {CODE: "1fd57ee6-91817-4151-8f24-3910c7cadb13", hash: "auto", qs_target: "?campanha={{CODE}}&apid={{CODE}}&acid={{acid}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}", pixel_url: `${PIXEL_URL_BASE}&doc={{hash}}&acid={{acid}}&apid={{CODE}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}`,
+    shorten_url: "https://rslv.cc/", target_url: "https://resolve.cenprot.org.br/app/", _controle: "seu_controle_de_envios_ou_lista_nome", utm_source: "fonte", utm_medium: "email", utm_campaign: "campanhaX", utm_content: "pf", utm_term: "livros%2Bcadernos%2Bcanetas", acid: "meu-uuid-uniq-user"},
+    // ... até 2.000
+]
+// POST 
+let options = {
+    'method' : 'post',
+    'contentType': 'application/json',
+    // Converta o array de objetos para uma string JSON
+    'payload' : JSON.stringify({'model_name': MODEL_NAME, 
+    'model_description': MODEL_DESCRIPTION,
+    'model_fields': MODEL_FIELDS, 
+    'contacts': JSON.stringify(contactsJSON)})
+}; 
+const response = fetch(URL, options)
+
+```
 
 
 ## Miscelânea
