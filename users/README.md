@@ -1097,14 +1097,16 @@ const contactsJSON = [
 ]
 // POST 
 let options = {
-    'method' : 'post',
-    'contentType': 'application/json',
-    // Converta o array de objetos para uma string JSON
-    'payload' : JSON.stringify({'model_name': MODEL_NAME, 
-    'model_description': MODEL_DESCRIPTION,
-    'model_fields': MODEL_FIELDS, 
-    'contacts': JSON.stringify(contactsJSON)})
-}; 
+        'method' : 'post',
+        'contentType': 'application/json',
+        // Converta o array de objetos para uma string JSON
+        'payload' : JSON.stringify({
+            'model_name': MODEL_NAME, 
+            'model_description': MODEL_DESCRIPTION,
+            'model_fields': MODEL_FIELDS, 
+            'contacts': contactsJSON})
+    }; 
+
 const response = fetch(URL, options)
 // console.log(response) 
 // { status: 200, data: JSON.stringify(outputData), message: `#[adai][utils][set_contacts] ${contacts.length} contacts saved successfully` }
@@ -1133,3 +1135,4 @@ Você pode atribuir um fbclid (Facebook Pixel id a um evento) via querystring fb
 Para informações adicionais acesse:
 * https://www.agnosticdata.ai/
 * https://docs.agnosticads.com/
+
