@@ -1095,18 +1095,25 @@ let pixel_url = `${PIXEL_URL_BASE}&fdoc=CODE&doc={{hash}}&acid={{acid}}&apid={{C
 ### Enviando os contacts (exemplo Javascript) #devskills
 ```javascript
 
+// Setup basico
 const URL = 'https://utils.agnosticdata.ai/v2/?api_key=' + api_key + '&project_id=' + project_id + '&f=contacts'
 const PIXEL_URL_BASE = 'https://utils.agnosticdata.ai/v2/?api_key=' + api_key + '&project_id=' + project_id + '&f=pixel'
 const MODEL_NAME = "newco_padrao_01"
 const MODEL_DESCRIPTION = "contém dados de usuários de protestos"
 const MODEL_FIELDS = ""
 
+// suas querystring de rastreio, marketing e remarketing
+let qs_target = "?campanha={{CODE}}&apid={{CODE}}&acid={{acid}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}";
+// url para pixel rastreio de emails
+let pixel_url = `${PIXEL_URL_BASE}&fdoc=CODE&doc={{CODE}}&acid={{acid}}&apid={{CODE}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}`;
+
 // quando vc utilizar fdoc está informando o campo para o qual irá identificar uma entrada 
 const contactsJSON = [
     {CODE: "test-91817-4151-8f24-3910c7cadb13", hash: "auto",
-    qs_target: "?campanha={{CODE}}&apid={{CODE}}&acid={{acid}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}", 
-    pixel_url: `${PIXEL_URL_BASE}&fdoc=CODE&doc={{CODE}}&acid={{acid}}&apid={{CODE}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}`,
-    shorten_url: "https://rslv.cc/", target_url: "https://resolve.cenprot.org.br/app/", 
+    qs_target: qs_target, 
+    pixel_url: pixel_url ,
+    shorten_url: "https://rslv.cc/", 
+    target_url: "https://resolve.cenprot.org.br/app/", 
     utm_source: "fonte", utm_medium: "email", utm_campaign: "campanhaX", utm_content: "pf", utm_term: "livros%2Bcadernos%2Bcanetas", 
     acid: "meu-uuid-uniq-user",
     _controle: "seu_controle_de_envios_ou_lista_nome"}
