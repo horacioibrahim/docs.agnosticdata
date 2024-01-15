@@ -1081,6 +1081,17 @@ Na etapa de criação dos contatos é possível tais os campos coplementares que
 * `complete_data_ps_id_ap` || null // pseudo id amplitude
 * `complete_data_install_id` || null // application install hash id apple ou android
 
+### IMPORTANTE
+Por padrão hash gerado é a chave primária do redirect e pixel. Em alguns casos isso pode ser um impeditivo ou porque um HASH de 6 dígitos seja insuficiente e/ou não representativo para o pixel ou mesmo o seu pixel é uma outra informação que será enviada em um campo específico. Para informa esse campo utilize `fdoc` ou (acrônimo de field doc) para identificar o campo que irá representar o `doc` para a pixel_url. 
+
+```javascript
+//...
+let pixel_url = `${PIXEL_URL_BASE}&fdoc=CODE&doc={{hash}}&acid={{acid}}&apid={{CODE}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}`,
+
+// Se existir fdic na pixel_url a imagem de pixel será consultada pelo campo informado em field doc (fdoc). 
+//...
+```
+
 ### Enviando os contacts (exemplo Javascript) #devskills
 ```javascript
 
@@ -1090,11 +1101,18 @@ const MODEL_NAME = "newco_padrao_01"
 const MODEL_DESCRIPTION = "contém dados de usuários de protestos"
 const MODEL_FIELDS = ""
 
+// quando vc utilizar fdoc está informando o campo para o qual irá identificar uma entrada 
 const contactsJSON = [
-    {CODE: "1fd57ee6-91817-4151-8f24-3910c7cadb13", hash: "auto", qs_target: "?campanha={{CODE}}&apid={{CODE}}&acid={{acid}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}", pixel_url: `${PIXEL_URL_BASE}&doc={{hash}}&acid={{acid}}&apid={{CODE}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}`,
-    shorten_url: "https://rslv.cc/", target_url: "https://resolve.cenprot.org.br/app/", _controle: "seu_controle_de_envios_ou_lista_nome", utm_source: "fonte", utm_medium: "email", utm_campaign: "campanhaX", utm_content: "pf", utm_term: "livros%2Bcadernos%2Bcanetas", acid: "meu-uuid-uniq-user"},
+    {CODE: "test-91817-4151-8f24-3910c7cadb13", hash: "auto",
+    qs_target: "?campanha={{CODE}}&apid={{CODE}}&acid={{acid}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}", 
+    pixel_url: `${PIXEL_URL_BASE}&fdoc=CODE&doc={{CODE}}&acid={{acid}}&apid={{CODE}}&utm_source={{utm_source}}&utm_medium={{utm_medium}}&utm_campaign={{utm_campaign}}&utm_term={{utm_term}}&utm_content={{utm_content}}`,
+    shorten_url: "https://rslv.cc/", target_url: "https://resolve.cenprot.org.br/app/", 
+    utm_source: "fonte", utm_medium: "email", utm_campaign: "campanhaX", utm_content: "pf", utm_term: "livros%2Bcadernos%2Bcanetas", 
+    acid: "meu-uuid-uniq-user",
+    _controle: "seu_controle_de_envios_ou_lista_nome"}
     // ... até 2.000
 ]
+
 // POST 
 let options = {
         'method' : 'post',
